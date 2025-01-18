@@ -16,7 +16,7 @@
     tips display. Your role is to design and implement REST endpoints using Spring Boot that
     facilitate data exchange between the frontend mobile application and the backend server.
 
-## API endpoints based on the requirements:
+## API endpoints:
 
 ### Waste Categories:
     GET /categories - Get all waste categories.
