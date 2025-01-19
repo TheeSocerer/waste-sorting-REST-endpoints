@@ -1,6 +1,7 @@
 package com.enviro365.wastesorting.controller;
 
 import com.enviro365.wastesorting.model.WasteCategory;
+import com.enviro365.wastesorting.payload.WasteCategoryDTO;
 import com.enviro365.wastesorting.service.WasteCategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +18,22 @@ public class WasteCategoryController {
     private WasteCategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<List<WasteCategory>> getAllCategories() {
+    public ResponseEntity<List<WasteCategoryDTO>> getAllCategories() {
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WasteCategory> getCategoryById(@PathVariable Long id) {
+    public ResponseEntity<WasteCategoryDTO> getCategoryById(@PathVariable Long id) {
         return ResponseEntity.ok(categoryService.getCategoryById(id));
     }
 
     @PostMapping
-    public ResponseEntity<WasteCategory> addCategory(@Valid @RequestBody WasteCategory category) {
+    public ResponseEntity<WasteCategoryDTO> addCategory(@Valid @RequestBody WasteCategory category) {
         return new ResponseEntity<>(category, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<WasteCategory> updateCategory(@PathVariable Long id, @Valid @RequestBody WasteCategory category) {
+    public ResponseEntity<WasteCategoryDTO> updateCategory(@PathVariable Long id, @Valid @RequestBody WasteCategory category) {
         return ResponseEntity.ok(categoryService.updateCategory(id, category));
     }
 
