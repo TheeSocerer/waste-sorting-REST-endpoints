@@ -19,16 +19,16 @@
 ## API endpoints:
 
 ### Waste Categories:
-    GET /categories - Get all waste categories.
-    GET /categories/{id} - Get details of a specific waste category.
-    POST /categories - Add a new waste category.
-    PUT /categories/{id} - Update an existing waste category.
-    DELETE /categories/{id} - Delete a waste category.
+    GET /api/categories - Get all waste categories.
+    GET /api/categories/{id} - Get details of a specific waste category.
+    POST /api/categories - Add a new waste category.
+    PUT /api/categories/{id} - Update an existing waste category.
+    DELETE /api/categories/{id} - Delete a waste category.
 ### Disposal Guidelines:
-    GET /guidelines - Get all disposal guidelines.
-    GET /guidelines/{categoryId} - Get guidelines for a specific category.
-    POST /guidelines - Add new disposal guidelines.
+    GET /api/guidelines - Get all disposal guidelines.
+    GET /api/guidelines/{categoryId} - Get guidelines for a specific category.
+    POST /api/guidelines - Add new disposal guidelines.
 ### Recycling Tips:
-    GET /tips - Get general recycling tips.
-    GET /tips/{categoryId} - Get tips for a specific category.
-    POST /tips - Add a new recycling tip.
+    GET /api/tips - Get general recycling tips.
+    GET /api/tips/{categoryId} - Get tips for a specific category.
+    POST /api/tips - Add a new recycling tip.
