@@ -13,14 +13,14 @@ import lombok.Setter;
 @AllArgsConstructor
 
 @Entity
+@Table(name = "disposalguidelines")
 public class DisposalGuideline {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotBlank
     private String guideline;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
     private WasteCategory category;
 }

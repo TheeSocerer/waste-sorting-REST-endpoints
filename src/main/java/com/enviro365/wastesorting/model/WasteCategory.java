@@ -14,15 +14,12 @@ import lombok.Setter;
 @AllArgsConstructor
 
 @Entity
+@Table(name = "wastecategories")
 public class WasteCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotBlank
     private String name;
-
-    @NotBlank
     private String description;
 }

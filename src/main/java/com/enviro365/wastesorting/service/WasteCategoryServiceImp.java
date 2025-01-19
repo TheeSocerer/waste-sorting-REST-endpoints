@@ -1,5 +1,6 @@
 package com.enviro365.wastesorting.service;
 
+import com.enviro365.wastesorting.exception.ResourceNotFoundException;
 import com.enviro365.wastesorting.model.WasteCategory;
 import com.enviro365.wastesorting.repository.WasteCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +23,18 @@ public class WasteCategoryServiceImp implements WasteCategoryService {
 
     @Override
     public WasteCategory getCategoryById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new Resou("Category not found"));;
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("WasteCategory","id", id ));
     }
 
     @Override
-    public WasteCategory saveCategory(WasteCategory category) {
+    public WasteCategory addCategory(WasteCategory category) {
         return repository.save(category);
     }
 
     @Override
     public WasteCategory updateCategory(Long id, WasteCategory category) {
         WasteCategory existing = getCategoryById(id);
+
         existing.setName(category.getName());
         existing.setDescription(category.getDescription());
         return repository.save(existing);
@@ -40,6 +42,7 @@ public class WasteCategoryServiceImp implements WasteCategoryService {
 
     @Override
     public void deleteCategory(Long id) {
+
         repository.deleteById(id);
     }
 }
