@@ -1,6 +1,5 @@
 package com.enviro365.wastesorting.controller;
 
-import com.enviro365.wastesorting.model.WasteCategory;
 import com.enviro365.wastesorting.payload.WasteCategoryDTO;
 import com.enviro365.wastesorting.service.WasteCategoryService;
 import jakarta.validation.Valid;
