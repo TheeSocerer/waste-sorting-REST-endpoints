@@ -28,13 +28,13 @@ public class WasteCategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<WasteCategoryDTO> addCategory(@Valid @RequestBody WasteCategory category) {
-        return new ResponseEntity<>(category, HttpStatus.CREATED);
+    public ResponseEntity<WasteCategoryDTO> addCategory(@Valid @RequestBody WasteCategoryDTO categoryDTO) {
+        return new ResponseEntity<>(categoryDTO, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<WasteCategoryDTO> updateCategory(@PathVariable Long id, @Valid @RequestBody WasteCategory category) {
-        return ResponseEntity.ok(categoryService.updateCategory(id, category));
+    public ResponseEntity<WasteCategoryDTO> updateCategory(@PathVariable Long id, @Valid @RequestBody WasteCategoryDTO categoryDTO) {
+        return ResponseEntity.ok(categoryService.updateCategory(id, categoryDTO));
     }
 
     @DeleteMapping("/{id}")

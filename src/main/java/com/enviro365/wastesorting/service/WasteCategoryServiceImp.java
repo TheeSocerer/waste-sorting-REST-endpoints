@@ -6,10 +6,9 @@ import com.enviro365.wastesorting.payload.WasteCategoryDTO;
 import com.enviro365.wastesorting.repository.WasteCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.MissingRequestValueException;
+import org.modelmapper.ModelMapper;
 
 import java.util.List;
-import java.util.MissingResourceException;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,6 +16,7 @@ public class WasteCategoryServiceImp implements WasteCategoryService {
 
     @Autowired
     private WasteCategoryRepository categoryRepository;
+    private ModelMapper modelMapper;
 
     @Override
     public List<WasteCategoryDTO> getAllCategories() {
@@ -26,27 +26,38 @@ public class WasteCategoryServiceImp implements WasteCategoryService {
     }
 
     @Override
-    public WasteCategory getCategoryById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("WasteCategory","id", id ));
+    public WasteCategoryDTO getCategoryById(Long id) {
+
+        WasteCategory category = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("WasteCategory","id", id ));
+        return modelMapper.map(category, WasteCategoryDTO.class);
     }
 
     @Override
-    public WasteCategory addCategory(WasteCategory category) {
-        return repository.save(category);
+    public WasteCategoryDTO addCategory(WasteCategoryDTO categoryDTO) {
+
+        WasteCategory category = modelMapper.map(categoryDTO, WasteCategory.class);
+        category = categoryRepository.save(category);
+        return modelMapper.map(category, WasteCategoryDTO.class);
     }
 
     @Override
-    public WasteCategory updateCategory(Long id, WasteCategory category) {
-        WasteCategory existing = getCategoryById(id);
+    public WasteCategoryDTO updateCategory(Long id, WasteCategoryDTO categoryDTO) {
+        WasteCategory category = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("WasteCategory","id", id ));
 
-        existing.setName(category.getName());
-        existing.setDescription(category.getDescription());
-        return repository.save(existing);
+        category.setName(categoryDTO.getName());
+        category.setDescription(categoryDTO.getDescription());
+        category = categoryRepository.save(category);
+        return modelMapper.map(category, WasteCategoryDTO.class);
+
+
     }
 
     @Override
     public void deleteCategory(Long id) {
 
-        repository.deleteById(id);
+        WasteCategory category = categoryRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Waste category", "id", id));
+
+        categoryRepository.delete(category);
     }
 }
