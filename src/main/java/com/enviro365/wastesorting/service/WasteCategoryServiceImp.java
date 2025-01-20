@@ -16,6 +16,7 @@ public class WasteCategoryServiceImp implements WasteCategoryService {
 
     @Autowired
     private WasteCategoryRepository categoryRepository;
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override

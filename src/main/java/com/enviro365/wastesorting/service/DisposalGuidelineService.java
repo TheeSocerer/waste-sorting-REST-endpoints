@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface DisposalGuidelineService {
     List<DisposalGuidelineDTO> getDisposalGuidelines();
-    List<DisposalGuidelineDTO> getDisposalGuidelinesByCategoryId(String categoryId);
+    List<DisposalGuidelineDTO> getDisposalGuidelinesByCategoryId(Long categoryId);
     DisposalGuidelineDTO addDisposalGuideline(DisposalGuidelineDTO disposalGuidelineDTO);
 }

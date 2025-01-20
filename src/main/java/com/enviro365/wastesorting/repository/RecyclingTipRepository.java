@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface RecyclingTipRepository extends JpaRepository<RecyclingTip, Long> {
-//    List<RecyclingTip> findRecyclingTipsByCategoryId(Long categoryId);
+    List<RecyclingTip> findRecyclingTipsByCategoryId(Long categoryId);
 }
