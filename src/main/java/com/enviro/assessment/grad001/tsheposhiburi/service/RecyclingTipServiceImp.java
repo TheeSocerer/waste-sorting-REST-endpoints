@@ -3,7 +3,6 @@ package com.enviro.assessment.grad001.tsheposhiburi.service;
 
 import com.enviro.assessment.grad001.tsheposhiburi.exception.Enviro365ExceptionHandler;
 import com.enviro.assessment.grad001.tsheposhiburi.exception.ResourceNotFoundException;
-import com.enviro.assessment.grad001.tsheposhiburi.model.DisposalGuideline;
 import com.enviro.assessment.grad001.tsheposhiburi.model.RecyclingTip;
 import com.enviro.assessment.grad001.tsheposhiburi.model.WasteCategory;
 import com.enviro.assessment.grad001.tsheposhiburi.payload.RecyclingTipDTO;
@@ -23,7 +22,7 @@ public class RecyclingTipServiceImp implements RecyclingTipService {
     @Autowired
     private RecyclingTipRepository recyclingTipRepository;
 
-    Autowired
+    @Autowired
     private WasteCategoryRepository wasteCategoryRepository;
 
     @Autowired
@@ -81,4 +80,6 @@ public class RecyclingTipServiceImp implements RecyclingTipService {
                 .orElseThrow(()-> new ResourceNotFoundException("Recycling Tip","id",id));
         recyclingTipRepository.delete(tip);
     }
+
+
 }
