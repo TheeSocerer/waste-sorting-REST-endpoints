@@ -1,11 +1,17 @@
 package com.enviro.assessment.grad001.tsheposhiburi.service;
 
 
+import com.enviro.assessment.grad001.tsheposhiburi.exception.Enviro365ExceptionHandler;
+import com.enviro.assessment.grad001.tsheposhiburi.exception.ResourceNotFoundException;
+import com.enviro.assessment.grad001.tsheposhiburi.model.DisposalGuideline;
 import com.enviro.assessment.grad001.tsheposhiburi.model.RecyclingTip;
+import com.enviro.assessment.grad001.tsheposhiburi.model.WasteCategory;
 import com.enviro.assessment.grad001.tsheposhiburi.payload.RecyclingTipDTO;
 import com.enviro.assessment.grad001.tsheposhiburi.repository.RecyclingTipRepository;
+import com.enviro.assessment.grad001.tsheposhiburi.repository.WasteCategoryRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +22,9 @@ public class RecyclingTipServiceImp implements RecyclingTipService {
 
     @Autowired
     private RecyclingTipRepository recyclingTipRepository;
+
+    Autowired
+    private WasteCategoryRepository wasteCategoryRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -40,5 +49,36 @@ public class RecyclingTipServiceImp implements RecyclingTipService {
         RecyclingTip savedRecyclingTip = recyclingTipRepository.save(recyclingTip);
 
         return modelMapper.map(savedRecyclingTip, RecyclingTipDTO.class);
+    }
+
+    @Override
+    public RecyclingTipDTO updateRecyclingTip(RecyclingTipDTO recyclingTipDTO) {
+        RecyclingTip tip = recyclingTipRepository.findById(recyclingTipDTO.getId())
+                .orElseThrow(()-> new ResourceNotFoundException("Recycling Tip","id",recyclingTipDTO.getId()));
+
+        WasteCategory wasteCategory = wasteCategoryRepository.findById(recyclingTipDTO.getCategoryId())
+                .orElseThrow(()-> new ResourceNotFoundException("Waste Category","id", recyclingTipDTO.getCategoryId()));
+
+        if(!tip.getCategory().getId().equals(wasteCategory.getId())) {
+            throw new Enviro365ExceptionHandler(HttpStatus.BAD_REQUEST, "Disposal Guideline does not belong to Waste Category");
+        }
+
+        tip.setCategory(wasteCategory);
+        tip.setTip(recyclingTipDTO.getTip());
+        return modelMapper.map(recyclingTipRepository.save(tip), RecyclingTipDTO.class);
+    }
+
+    @Override
+    public RecyclingTipDTO getRecyclingTipById(Long id) {
+        RecyclingTip tip = recyclingTipRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Recycling Tip","id",id));
+        return modelMapper.map(tip, RecyclingTipDTO.class);
+    }
+
+    @Override
+    public void deleteRecyclingTipById(Long id) {
+        RecyclingTip tip = recyclingTipRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Recycling Tip","id",id));
+        recyclingTipRepository.delete(tip);
     }
 }

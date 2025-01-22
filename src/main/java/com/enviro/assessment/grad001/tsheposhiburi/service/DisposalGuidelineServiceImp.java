@@ -68,7 +68,6 @@ public class DisposalGuidelineServiceImp implements DisposalGuidelineService {
         DisposalGuideline guideline = disposalGuidelineRepository.findById(disposalGuidelineDTO.getId())
                 .orElseThrow(()-> new ResourceNotFoundException("Disposal Guideline","id",disposalGuidelineDTO.getId()));
 
-        guideline.setGuideline(disposalGuidelineDTO.getGuideline());
         WasteCategory wasteCategory = wasteCategoryRepository.findById(disposalGuidelineDTO.getCategoryId())
                 .orElseThrow(()-> new ResourceNotFoundException("Waste Category","id", disposalGuidelineDTO.getCategoryId()));
 
