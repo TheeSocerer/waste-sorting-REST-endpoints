@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -22,4 +24,10 @@ public class WasteCategory {
     private Long id;
     private String name;
     private String description;
+
+    @OneToMany(mappedBy = "wastecategories", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    private List<WasteCategory> wasteCategories;
+
+    @OneToMany(mappedBy = "wastecategories", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    private List<RecyclingTip> recyclingTips;
 }

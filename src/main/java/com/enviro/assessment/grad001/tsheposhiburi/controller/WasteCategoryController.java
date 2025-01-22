@@ -28,7 +28,7 @@ public class WasteCategoryController {
 
     @PostMapping
     public ResponseEntity<WasteCategoryDTO> addCategory(@Valid @RequestBody WasteCategoryDTO categoryDTO) {
-        return new ResponseEntity<>(categoryDTO, HttpStatus.CREATED);
+        return new ResponseEntity<>(categoryService.addCategory(categoryDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
@@ -38,6 +38,7 @@ public class WasteCategoryController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long id) {
+        categoryService.deleteCategory(id);
         return ResponseEntity.ok("Category deleted successfully!.");
     }
 }
