@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/categories")
 public class WasteCategoryController {
@@ -27,7 +28,7 @@ public class WasteCategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<WasteCategoryDTO> addCategory(@Valid @RequestBody WasteCategoryDTO categoryDTO) {
+    public ResponseEntity<WasteCategoryDTO> addCategory( @RequestBody WasteCategoryDTO categoryDTO) {
         return new ResponseEntity<>(categoryService.addCategory(categoryDTO), HttpStatus.CREATED);
     }
 

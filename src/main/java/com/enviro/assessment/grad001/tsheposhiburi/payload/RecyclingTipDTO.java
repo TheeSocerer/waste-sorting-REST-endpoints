@@ -2,25 +2,20 @@ package com.enviro.assessment.grad001.tsheposhiburi.payload;
 
 
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Data;
+import lombok.*;
 
-/**
- * @Id
- *     @GeneratedValue(strategy = GenerationType.IDENTITY)
- *     private Long id;
- *     private String tip;
- *
- *     @ManyToOne
- *     private WasteCategory category;
- */
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class RecyclingTipDTO {
-    private long id;
+    private Long id;
 
     @NotEmpty
     private String tip;
 
     @NotEmpty
     private Long categoryId;
+
 
 }

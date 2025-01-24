@@ -26,9 +26,14 @@
     DELETE /api/categories/{id} - Delete a waste category.
 ### Disposal Guidelines:
     GET /api/guidelines - Get all disposal guidelines.
-    GET /api/guidelines/{categoryId} - Get guidelines for a specific category.
+    GET /api/guidelines/category/{categoryId} - Get guidelines for a specific category.
     POST /api/guidelines - Add new disposal guidelines.
+    PUT /api/guidelines/{id} - Update an existing disposal guidelines.
+    DELETE /api/guidelines/{id} - Delete a disposal guidelines.
 ### Recycling Tips:
     GET /api/tips - Get general recycling tips.
-    GET /api/tips/{categoryId} - Get tips for a specific category.
+    GET /api/tips/category/{categoryId} - Get tips for a specific category.
+    GET /api/tips/{Id} - Get tips for recycling tips.
     POST /api/tips - Add a new recycling tip.
+    PUT /api/tips/{id} - Update an existing recycling tips.
+    DELETE /api/tips/{id} - Delete a recycling tips.

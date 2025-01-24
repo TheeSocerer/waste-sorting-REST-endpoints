@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
 
+
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 @Service
 public class WasteCategoryServiceImp implements WasteCategoryService {
@@ -37,7 +39,9 @@ public class WasteCategoryServiceImp implements WasteCategoryService {
     @Override
     public WasteCategoryDTO addCategory(WasteCategoryDTO categoryDTO) {
 
-        WasteCategory category = modelMapper.map(categoryDTO, WasteCategory.class);
+        WasteCategory category = new WasteCategory();
+        category.setName(categoryDTO.getName());
+        category.setDescription(categoryDTO.getDescription());
         category = categoryRepository.save(category);
         return modelMapper.map(category, WasteCategoryDTO.class);
     }
