@@ -108,34 +108,53 @@ class RecyclingTipServiceImpTest {
 
     @Test
     void testUpdateRecyclingTip_Success() {
-        // Mocking repository call
-        when(recyclingTipRepository.findById(anyLong())).thenReturn(Optional.of(recyclingTip));
-        when(wasteCategoryRepository.findById(anyLong())).thenReturn(Optional.of(wasteCategory));
-        when(recyclingTipRepository.save(any(RecyclingTip.class))).thenReturn(recyclingTip);
-        when(modelMapper.map(any(RecyclingTip.class), eq(RecyclingTipDTO.class))).thenReturn(recyclingTipDTO);
+        // Create existing category and recycling tip
+        WasteCategory existingCategory = new WasteCategory();
+        existingCategory.setId(1L);
+        existingCategory.setName("Plastic");
+        existingCategory.setDescription("Plastic waste");
 
-        // Testing the service method
-        RecyclingTipDTO result = recyclingTipService.updateRecyclingTip(recyclingTipDTO);
+        RecyclingTip existingTip = new RecyclingTip();
+        existingTip.setId(1L);
+        existingTip.setTip("Recycle plastic");
+        existingTip.setCategory(existingCategory);
 
-        // Verifying the result
-        assertNotNull(result);
-        assertEquals("Recycle plastic waste", result.getTip());
-        verify(recyclingTipRepository, times(1)).save(any(RecyclingTip.class));
+        // Mocking repository calls
+        when(recyclingTipRepository.findById(anyLong())).thenReturn(Optional.of(existingTip));
+        when(wasteCategoryRepository.findById(anyLong())).thenReturn(Optional.of(existingCategory));
+
+        // Prepare the DTO with matching categoryId
+        RecyclingTipDTO recyclingTipDTO = new RecyclingTipDTO();
+        recyclingTipDTO.setId(1L);
+        recyclingTipDTO.setTip("Updated recycling tip");
+        recyclingTipDTO.setCategoryId(1L);  // Matching categoryId
+
+        // Call the service method
+        RecyclingTipDTO updatedTipDTO = recyclingTipService.updateRecyclingTip(recyclingTipDTO);
+
+        // Assert not null
+        assertNotNull(updatedTipDTO, "The updated RecyclingTipDTO should not be null");
+        assertEquals("Updated recycling tip", updatedTipDTO.getTip(), "Tip content should match");
+        assertEquals(1L, updatedTipDTO.getCategoryId(), "Category ID should match");
     }
+
+
 
     @Test
     void testUpdateRecyclingTip_Fail_CategoryMismatch() {
-        // Mocking repository call
+        // Mocking repository call for RecyclingTip
         RecyclingTip anotherTip = new RecyclingTip();
         anotherTip.setId(1L);
         anotherTip.setTip("Recycle paper waste");
+        anotherTip.setCategory(wasteCategory);
 
+        // Mocking the call to findById for RecyclingTip and WasteCategory
         when(recyclingTipRepository.findById(anyLong())).thenReturn(Optional.of(anotherTip));
-        when(wasteCategoryRepository.findById(anyLong())).thenReturn(Optional.of(wasteCategory));
+        when(wasteCategoryRepository.findById(anyLong())).thenReturn(Optional.of(new WasteCategory())); // 'newWasteCategory' should be different from 'existingWasteCategory'
 
         // Testing the service method
         Enviro365ExceptionHandler thrown = assertThrows(Enviro365ExceptionHandler.class, () -> {
-            recyclingTipService.updateRecyclingTip(recyclingTipDTO);
+            recyclingTipService.updateRecyclingTip(recyclingTipDTO); // 'recyclingTipDTO' should have 'categoryId' matching 'newWasteCategory'
         });
 
         // Verifying the exception message

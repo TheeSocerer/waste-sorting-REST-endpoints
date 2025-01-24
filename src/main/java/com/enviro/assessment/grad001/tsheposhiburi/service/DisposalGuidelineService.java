@@ -10,6 +10,6 @@ public interface DisposalGuidelineService {
     List<DisposalGuidelineDTO> getDisposalGuidelinesByCategoryId(Long categoryId);
     DisposalGuidelineDTO addDisposalGuideline(DisposalGuidelineDTO disposalGuidelineDTO);
     DisposalGuidelineDTO getDisposalGuidelineById(Long id);
-    DisposalGuidelineDTO updateDisposalGuideline(DisposalGuidelineDTO disposalGuidelineDTO);
+    DisposalGuidelineDTO updateDisposalGuideline(Long id, DisposalGuidelineDTO disposalGuidelineDTO);
     void deleteDisposalGuidelineById(Long id);
 }

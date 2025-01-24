@@ -79,9 +79,9 @@ public class DisposalGuidelineServiceImp implements DisposalGuidelineService {
      */
 
     @Override
-    public DisposalGuidelineDTO updateDisposalGuideline(DisposalGuidelineDTO disposalGuidelineDTO) {
-        DisposalGuideline guideline = disposalGuidelineRepository.findById(disposalGuidelineDTO.getId())
-                .orElseThrow(()-> new ResourceNotFoundException("Disposal Guideline","id",disposalGuidelineDTO.getId()));
+    public DisposalGuidelineDTO updateDisposalGuideline(Long id, DisposalGuidelineDTO disposalGuidelineDTO) {
+        DisposalGuideline guideline = disposalGuidelineRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Disposal Guideline","id",id));
 
         WasteCategory wasteCategory = wasteCategoryRepository.findById(disposalGuidelineDTO.getCategoryId())
                 .orElseThrow(()-> new ResourceNotFoundException("Waste Category","id", disposalGuidelineDTO.getCategoryId()));

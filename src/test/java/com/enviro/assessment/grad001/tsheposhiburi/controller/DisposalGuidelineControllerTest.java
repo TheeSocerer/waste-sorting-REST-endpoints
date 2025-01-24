@@ -5,10 +5,10 @@ import com.enviro.assessment.grad001.tsheposhiburi.service.DisposalGuidelineServ
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -28,7 +28,7 @@ public class DisposalGuidelineControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @InjectMocks
     private DisposalGuidelineService disposalGuidelineService;
 
     @Autowired
@@ -96,7 +96,7 @@ public class DisposalGuidelineControllerTest {
     @Test
     void testUpdateDisposalGuideline_Success() throws Exception {
         guidelineDTO.setGuideline("Updated disposal guideline for electronic waste.");
-        Mockito.when(disposalGuidelineService.updateDisposalGuideline(any(DisposalGuidelineDTO.class))).thenReturn(guidelineDTO);
+        Mockito.when(disposalGuidelineService.updateDisposalGuideline(anyLong(),any(DisposalGuidelineDTO.class))).thenReturn(guidelineDTO);
 
         mockMvc.perform(put("/api/guidelines")
                         .contentType(MediaType.APPLICATION_JSON)

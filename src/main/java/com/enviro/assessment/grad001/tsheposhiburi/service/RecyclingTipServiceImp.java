@@ -53,19 +53,22 @@ public class RecyclingTipServiceImp implements RecyclingTipService {
     @Override
     public RecyclingTipDTO updateRecyclingTip(RecyclingTipDTO recyclingTipDTO) {
         RecyclingTip tip = recyclingTipRepository.findById(recyclingTipDTO.getId())
-                .orElseThrow(()-> new ResourceNotFoundException("Recycling Tip","id",recyclingTipDTO.getId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Recycling Tip", "id", recyclingTipDTO.getId()));
 
         WasteCategory wasteCategory = wasteCategoryRepository.findById(recyclingTipDTO.getCategoryId())
-                .orElseThrow(()-> new ResourceNotFoundException("Waste Category","id", recyclingTipDTO.getCategoryId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Waste Category", "id", recyclingTipDTO.getCategoryId()));
 
-        if(!tip.getCategory().getId().equals(wasteCategory.getId())) {
+        // Check if the RecyclingTip's category is null or if the IDs do not match
+        if (tip.getCategory() == null || !tip.getCategory().getId().equals(wasteCategory.getId())) {
             throw new Enviro365ExceptionHandler(HttpStatus.BAD_REQUEST, "Disposal Guideline does not belong to Waste Category");
         }
 
         tip.setCategory(wasteCategory);
         tip.setTip(recyclingTipDTO.getTip());
+        tip.setId(recyclingTipDTO.getId());
         return modelMapper.map(recyclingTipRepository.save(tip), RecyclingTipDTO.class);
     }
+
 
     @Override
     public RecyclingTipDTO getRecyclingTipById(Long id) {

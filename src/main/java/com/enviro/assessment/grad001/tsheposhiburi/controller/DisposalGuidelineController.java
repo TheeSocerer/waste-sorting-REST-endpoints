@@ -39,9 +39,9 @@ public class DisposalGuidelineController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<DisposalGuidelineDTO> updateDisposalGuideline(@RequestBody DisposalGuidelineDTO disposalGuidelineDTO) {
-        DisposalGuidelineDTO updatedGuideline = disposalGuidelineService.updateDisposalGuideline(disposalGuidelineDTO);
+    @PutMapping("{id}")
+    public ResponseEntity<DisposalGuidelineDTO> updateDisposalGuideline(@RequestBody DisposalGuidelineDTO disposalGuidelineDTO, @PathVariable Long id) {
+        DisposalGuidelineDTO updatedGuideline = disposalGuidelineService.updateDisposalGuideline(id,disposalGuidelineDTO);
         return new ResponseEntity<>(updatedGuideline, HttpStatus.OK);
     }
 

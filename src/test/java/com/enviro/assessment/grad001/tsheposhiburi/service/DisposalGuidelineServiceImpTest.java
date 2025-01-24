@@ -119,7 +119,7 @@ class DisposalGuidelineServiceImpTest {
         when(mapper.map(disposalGuideline, DisposalGuidelineDTO.class)).thenReturn(disposalGuidelineDTO);
 
         // Act
-        DisposalGuidelineDTO result = disposalGuidelineService.updateDisposalGuideline(disposalGuidelineDTO);
+        DisposalGuidelineDTO result = disposalGuidelineService.updateDisposalGuideline(1L,disposalGuidelineDTO);
 
         // Assert
         assertNotNull(result);
@@ -133,7 +133,7 @@ class DisposalGuidelineServiceImpTest {
 
         // Act & Assert for ResourceNotFoundException (if category ID is not found)
         assertThrows(ResourceNotFoundException.class, () ->
-                disposalGuidelineService.updateDisposalGuideline(new DisposalGuidelineDTO(1L, "New Guideline", 2L))
+                disposalGuidelineService.updateDisposalGuideline(1L,new DisposalGuidelineDTO(1L, "New Guideline", 2L))
         );
 
         // Act & Assert for Enviro365ExceptionHandler (if the category ID doesn't match)
@@ -142,7 +142,7 @@ class DisposalGuidelineServiceImpTest {
         wasteCategory1.setName("Glass");
         when(wasteCategoryRepository.findById(2L)).thenReturn(Optional.of(wasteCategory1));
         assertThrows(Enviro365ExceptionHandler.class, () ->
-                disposalGuidelineService.updateDisposalGuideline(new DisposalGuidelineDTO(1L, "New Guideline", 2L))
+                disposalGuidelineService.updateDisposalGuideline(1L,new DisposalGuidelineDTO(1L, "New Guideline", 2L))
         );
     }
 
