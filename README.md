@@ -123,26 +123,10 @@ The application should now be running locally on http://localhost:8080.
    Description: Deletes a recycling tip by its id.
    Response: 200 OK if deletion is successful.
 
+## Entity-Relationship Diagram:
+
+![img.png](img.png)
 
 
-## API endpoints:
 
-### Waste Categories:
-    GET /api/categories - Get all waste categories.
-    GET /api/categories/{id} - Get details of a specific waste category.
-    POST /api/categories - Add a new waste category.
-    PUT /api/categories/{id} - Update an existing waste category.
-    DELETE /api/categories/{id} - Delete a waste category.
-### Disposal Guidelines:
-    GET /api/guidelines - Get all disposal guidelines.
-    GET /api/guidelines/category/{categoryId} - Get guidelines for a specific category.
-    POST /api/guidelines - Add new disposal guidelines.
-    PUT /api/guidelines/{id} - Update an existing disposal guidelines.
-    DELETE /api/guidelines/{id} - Delete a disposal guidelines.
-### Recycling Tips:
-    GET /api/tips - Get general recycling tips.
-    GET /api/tips/category/{categoryId} - Get tips for a specific category.
-    GET /api/tips/{Id} - Get tips for recycling tips.
-    POST /api/tips - Add a new recycling tip.
-    PUT /api/tips/{id} - Update an existing recycling tips.
-    DELETE /api/tips/{id} - Delete a recycling tips.
+
