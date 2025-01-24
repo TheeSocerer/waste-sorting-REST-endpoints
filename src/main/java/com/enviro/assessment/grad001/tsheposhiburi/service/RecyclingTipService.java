@@ -10,7 +10,7 @@ public interface RecyclingTipService {
     List<RecyclingTipDTO> getAllRecyclingTips();
     List<RecyclingTipDTO> getRecyclingTipsByCategory(Long categoryId);
     RecyclingTipDTO addRecyclingTip(RecyclingTipDTO recyclingTipDTO);
-    RecyclingTipDTO updateRecyclingTip(RecyclingTipDTO recyclingTipDTO);
+    RecyclingTipDTO updateRecyclingTip(Long id,RecyclingTipDTO recyclingTipDTO);
     RecyclingTipDTO getRecyclingTipById(Long id);
     void deleteRecyclingTipById(Long id);
 }

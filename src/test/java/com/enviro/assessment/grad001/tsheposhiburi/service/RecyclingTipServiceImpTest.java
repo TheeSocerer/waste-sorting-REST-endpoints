@@ -130,7 +130,7 @@ class RecyclingTipServiceImpTest {
         recyclingTipDTO.setCategoryId(1L);  // Matching categoryId
 
         // Call the service method
-        RecyclingTipDTO updatedTipDTO = recyclingTipService.updateRecyclingTip(recyclingTipDTO);
+        RecyclingTipDTO updatedTipDTO = recyclingTipService.updateRecyclingTip(1L,recyclingTipDTO);
 
         // Assert not null
         assertNotNull(updatedTipDTO, "The updated RecyclingTipDTO should not be null");
@@ -154,7 +154,7 @@ class RecyclingTipServiceImpTest {
 
         // Testing the service method
         Enviro365ExceptionHandler thrown = assertThrows(Enviro365ExceptionHandler.class, () -> {
-            recyclingTipService.updateRecyclingTip(recyclingTipDTO); // 'recyclingTipDTO' should have 'categoryId' matching 'newWasteCategory'
+            recyclingTipService.updateRecyclingTip(1L,recyclingTipDTO); // 'recyclingTipDTO' should have 'categoryId' matching 'newWasteCategory'
         });
 
         // Verifying the exception message

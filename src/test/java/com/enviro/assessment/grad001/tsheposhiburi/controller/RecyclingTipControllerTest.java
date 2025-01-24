@@ -96,7 +96,7 @@ public class RecyclingTipControllerTest {
     @Test
     void testUpdateTip_Success() throws Exception {
         tipDTO.setTip("Updated recycling tip.");
-        Mockito.when(recyclingTipService.updateRecyclingTip(any(RecyclingTipDTO.class))).thenReturn(tipDTO);
+        Mockito.when(recyclingTipService.updateRecyclingTip(anyLong(),any(RecyclingTipDTO.class))).thenReturn(tipDTO);
 
         mockMvc.perform(put("/api/tips")
                         .contentType(MediaType.APPLICATION_JSON)

@@ -51,8 +51,8 @@ public class RecyclingTipServiceImp implements RecyclingTipService {
     }
 
     @Override
-    public RecyclingTipDTO updateRecyclingTip(RecyclingTipDTO recyclingTipDTO) {
-        RecyclingTip tip = recyclingTipRepository.findById(recyclingTipDTO.getId())
+    public RecyclingTipDTO updateRecyclingTip(Long id,RecyclingTipDTO recyclingTipDTO) {
+        RecyclingTip tip = recyclingTipRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Recycling Tip", "id", recyclingTipDTO.getId()));
 
         WasteCategory wasteCategory = wasteCategoryRepository.findById(recyclingTipDTO.getCategoryId())

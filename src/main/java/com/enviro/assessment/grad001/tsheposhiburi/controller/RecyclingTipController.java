@@ -38,9 +38,9 @@ public class RecyclingTipController {
                 HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<RecyclingTipDTO> updateTip(@RequestBody RecyclingTipDTO recyclingTipDTO) {
-        RecyclingTipDTO updatedTip = recyclingTipService.updateRecyclingTip(recyclingTipDTO);
+    @PutMapping("{id}")
+    public ResponseEntity<RecyclingTipDTO> updateTip(@RequestBody RecyclingTipDTO recyclingTipDTO, @PathVariable Long id) {
+        RecyclingTipDTO updatedTip = recyclingTipService.updateRecyclingTip(id,recyclingTipDTO);
         return new ResponseEntity<>(updatedTip, HttpStatus.OK);
     }
 
