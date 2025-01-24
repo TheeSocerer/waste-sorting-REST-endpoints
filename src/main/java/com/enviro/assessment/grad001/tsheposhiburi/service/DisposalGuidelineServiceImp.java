@@ -62,6 +62,21 @@ public class DisposalGuidelineServiceImp implements DisposalGuidelineService {
 
         return mapper.map(guideline, DisposalGuidelineDTO.class);
     }
+    /*
+    public DisposalGuidelineDTO updateDisposalGuideline(DisposalGuidelineDTO disposalGuidelineDTO) {
+    Optional<DisposalGuideline> existingGuideline = disposalGuidelineRepository.findById(disposalGuidelineDTO.getId());
+    if (existingGuideline.isPresent()) {
+        Optional<WasteCategory> wasteCategory = wasteCategoryRepository.findById(disposalGuidelineDTO.getCategoryId());
+        if (!wasteCategory.isPresent()) {
+            throw new Enviro365ExceptionHandler("Invalid Waste Category ID", HttpStatus.BAD_REQUEST);
+        }
+
+
+    } else {
+        throw new ResourceNotFoundException("Disposal Guideline not found");
+    }
+}
+     */
 
     @Override
     public DisposalGuidelineDTO updateDisposalGuideline(DisposalGuidelineDTO disposalGuidelineDTO) {
